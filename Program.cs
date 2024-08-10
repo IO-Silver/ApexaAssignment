@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ApexaAssignment.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApexaAssignmentContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("ApexaAssignmentContext") ?? throw new InvalidOperationException("Connection string 'ApexaAssignmentContext' not found.")));
 
 // Add services to the container.
 
