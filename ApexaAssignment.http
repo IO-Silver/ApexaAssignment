@@ -1,6 +1,6 @@
 @ApexaAssignment_HostAddress = http://localhost:5192
 
-GET {{ApexaAssignment_HostAddress}}/weatherforecast/
+GET {{ApexaAssignment_HostAddress}}/advisors
 Accept: application/json
 
 ###

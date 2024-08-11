@@ -14,6 +14,6 @@ namespace ApexaAssignment.Data
         {
         }
 
-        public DbSet<ApexaAssignment.Models.Advisor> Advisor { get; set; } = default!;
+        public DbSet<ApexaAssignment.Models.Advisor> Advisors { get; set; } = default!;
     }
 }

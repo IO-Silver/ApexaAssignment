@@ -22,7 +22,7 @@ namespace ApexaAssignment.Controllers
         // GET: Advisors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Advisor.ToListAsync());
+            return View(await _context.Advisors.ToListAsync());
         }
 
         // GET: Advisors/Details/5
@@ -33,7 +33,7 @@ namespace ApexaAssignment.Controllers
                 return NotFound();
             }
 
-            var advisor = await _context.Advisor
+            var advisor = await _context.Advisors
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (advisor == null)
             {
@@ -54,7 +54,7 @@ namespace ApexaAssignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Adress,Phone,HealthStatus")] Advisor advisor)
+        public async Task<IActionResult> Create([Bind("Id,Name,SIN,Address,Phone")] Advisor advisor)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace ApexaAssignment.Controllers
                 return NotFound();
             }
 
-            var advisor = await _context.Advisor.FindAsync(id);
+            var advisor = await _context.Advisors.FindAsync(id);
             if (advisor == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace ApexaAssignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,Adress,Phone,HealthStatus")] Advisor advisor)
+        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,SIN,Address,Phone,HealthStatus")] Advisor advisor)
         {
             if (id != advisor.Id)
             {
@@ -124,7 +124,7 @@ namespace ApexaAssignment.Controllers
                 return NotFound();
             }
 
-            var advisor = await _context.Advisor
+            var advisor = await _context.Advisors
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (advisor == null)
             {
@@ -139,10 +139,10 @@ namespace ApexaAssignment.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
-            var advisor = await _context.Advisor.FindAsync(id);
+            var advisor = await _context.Advisors.FindAsync(id);
             if (advisor != null)
             {
-                _context.Advisor.Remove(advisor);
+                _context.Advisors.Remove(advisor);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace ApexaAssignment.Controllers
 
         private bool AdvisorExists(long id)
         {
-            return _context.Advisor.Any(e => e.Id == id);
+            return _context.Advisors.Any(e => e.Id == id);
         }
     }
 }
