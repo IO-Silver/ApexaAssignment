@@ -6,6 +6,9 @@ namespace ApexaAssignment.Models
 {
     public class Advisor
     {
+        private string _SIN;
+        private string _Phone;
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -18,16 +21,20 @@ namespace ApexaAssignment.Models
         [Index(IsUnique = true)]
         public string SIN 
         {
+            get { return $"{new string('*', 9)}"; }
+            set { _SIN = value; }
+        }
+        [StringLength(255, ErrorMessage = "Address cannot be longer than 255 characters.")]
+        public string? Address { get; set; }
+        [StringLength(8, MinimumLength = 8, ErrorMessage = "Phone Number must be 8 characters in length.")]
+        public string? Phone
+        {
             get
             {
-                return $"{new string('*', 9)}";
+                return $"{new string('*', 8)}";
             }
-            set { }
+            set { _Phone = value; }
         }
-        public string? Address { get; set; }
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please enter a valid Phone number")]
-        public string? Phone { get; set; }
         [DisplayName("Health Status")]
         public HealthStatusType HealthStatus { get; set; }
     }

@@ -58,6 +58,20 @@ namespace ApexaAssignment.Controllers
         {
             if (ModelState.IsValid)
             {
+                var rand = new Random();
+                int odds = rand.Next(0, 100);
+                if (odds < 60)
+                {
+                    advisor.HealthStatus = HealthStatusType.Green;
+                }
+                else if (odds < 80)
+                {
+                    advisor.HealthStatus = HealthStatusType.Yellow;
+                }
+                else
+                {
+                    advisor.HealthStatus = HealthStatusType.Red;
+                }
                 _context.Add(advisor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,7 +80,7 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors/Edit/5
-        public async Task<IActionResult> Edit(long? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +100,7 @@ namespace ApexaAssignment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Name,SIN,Address,Phone,HealthStatus")] Advisor advisor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,SIN,Address,Phone,HealthStatus")] Advisor advisor)
         {
             if (id != advisor.Id)
             {
@@ -117,7 +131,7 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors/Delete/5
-        public async Task<IActionResult> Delete(long? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +151,7 @@ namespace ApexaAssignment.Controllers
         // POST: Advisors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(long id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var advisor = await _context.Advisors.FindAsync(id);
             if (advisor != null)
@@ -149,7 +163,7 @@ namespace ApexaAssignment.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdvisorExists(long id)
+        private bool AdvisorExists(int id)
         {
             return _context.Advisors.Any(e => e.Id == id);
         }
