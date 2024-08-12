@@ -10,6 +10,8 @@ using ApexaAssignment.Models;
 
 namespace ApexaAssignment.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class AdvisorsController : Controller
     {
         private readonly ApexaAssignmentContext _context;
@@ -20,12 +22,15 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Advisors.ToListAsync());
         }
 
         // GET: Advisors/Details/5
+        [Route("[controller]/Details/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)
@@ -44,6 +49,8 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors/Create
+        [Route("[controller]/Create")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +59,7 @@ namespace ApexaAssignment.Controllers
         // POST: Advisors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("[controller]/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,SIN,Address,Phone")] Advisor advisor)
@@ -80,6 +88,8 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors/Edit/5
+        [Route("[controller]/Edit/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +108,7 @@ namespace ApexaAssignment.Controllers
         // POST: Advisors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Route("[controller]/Edit/{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,SIN,Address,Phone,HealthStatus")] Advisor advisor)
@@ -131,6 +142,8 @@ namespace ApexaAssignment.Controllers
         }
 
         // GET: Advisors/Delete/5
+        [Route("[controller]/Delete/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,6 +162,7 @@ namespace ApexaAssignment.Controllers
         }
 
         // POST: Advisors/Delete/5
+        [Route("[controller]/Delete/{id}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

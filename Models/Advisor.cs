@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApexaAssignment.Models
 {
     public class Advisor
     {
         private string _SIN;
-        private string _Phone;
+        private string? _Phone;
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -36,6 +37,7 @@ namespace ApexaAssignment.Models
             set { _Phone = value; }
         }
         [DisplayName("Health Status")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public HealthStatusType HealthStatus { get; set; }
     }
 }

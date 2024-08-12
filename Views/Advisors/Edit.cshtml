@@ -43,7 +43,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="HealthStatus" class="control-label"></label>
-                <select asp-for="HealthStatus" class="form-control"></select>
+                <select class="form-control">
+                    <option value=0>Green</option>
+                    <option value=1>Yellow</option>
+                    <option value=2>Red</option>
+                </select>
                 <span asp-validation-for="HealthStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
